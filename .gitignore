@@ -17,9 +17,25 @@
 
 # misc
 .DS_Store
-.env*
+*.pem
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# benchmark
+posts/benchmark-post-*.md
+generate_posts.js
+benchmark.ts
+benchmark_output.txt
