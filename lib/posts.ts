@@ -48,6 +48,11 @@ export function getAllPostIds() {
 }
 
 export async function getPostData(id: string) {
+  // Validate id to prevent path traversal
+  if (id.includes('..') || id.includes('/') || id.includes('\\')) {
+    throw new Error('Invalid post ID');
+  }
+
   const fullPath = path.join(postsDirectory, `${id}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
 
