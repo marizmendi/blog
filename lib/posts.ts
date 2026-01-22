@@ -50,6 +50,13 @@ export function getAllPostIds() {
 
 export async function getPostData(id: string) {
   const fullPath = path.join(postsDirectory, `${id}.md`)
+
+  // Validate the path to prevent directory traversal attacks
+  const resolvedPath = path.resolve(fullPath)
+  if (!resolvedPath.startsWith(postsDirectory + path.sep)) {
+    throw new Error('Invalid path: Potential path traversal attempt')
+  }
+
   const fileContents = await fs.promises.readFile(fullPath, 'utf8')
 
   // Use gray-matter to parse the post metadata section
