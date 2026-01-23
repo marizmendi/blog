@@ -70,7 +70,20 @@ export async function getPostData(id: string) {
 
   // Sanitize the HTML string using isomorphic-dompurify
   // This prevents XSS attacks by removing malicious scripts
-  const sanitizedContentHtml = DOMPurify.sanitize(contentHtml)
+  const sanitizedContentHtml = DOMPurify.sanitize(contentHtml, {
+    FORBID_TAGS: [
+      'style',
+      'form',
+      'input',
+      'select',
+      'textarea',
+      'button',
+      'iframe',
+      'frame',
+      'object',
+      'embed'
+    ]
+  })
 
   // Combine the data with the id and contentHtml
   return {

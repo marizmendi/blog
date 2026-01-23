@@ -12,3 +12,8 @@
 **Vulnerability:** User input used directly in `path.join` can allow directory traversal (`../`) to access files outside the intended directory.
 **Learning:** `path.join` normalizes paths but does not restrict them to a root.
 **Prevention:** Always resolve the final path using `path.resolve` and verify it starts with the intended root directory (appended with `path.sep` to prevent partial prefix matches).
+
+## 2026-01-23 - Hardening DOMPurify against CSS Injection and Phishing
+**Vulnerability:** Default `DOMPurify` configuration allows `<style>` tags and form elements (`<form>`, `<input>`, etc.), enabling CSS injection (DoS, defacement) and Phishing attacks.
+**Learning:** For blog content, rich HTML is rarely needed beyond formatting. Interactive elements and global styles pose unnecessary risks.
+**Prevention:** Explicitly forbid `style`, `form`, `input`, `select`, `textarea`, `button`, `iframe`, and `object` tags in `DOMPurify` configuration.
